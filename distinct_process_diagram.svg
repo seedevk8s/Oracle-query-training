@@ -1,0 +1,233 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 -->
+  <rect width="1200" height="800" fill="#f8f9fa"/>
+  
+  <!-- 제목 -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2c3e50">
+    SELECT DISTINCT JOB, DEPTNO FROM EMP - 중복 제거 과정
+  </text>
+  
+  <!-- 원본 데이터 섹션 -->
+  <text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#34495e">
+    원본 데이터 (14행)
+  </text>
+  
+  <!-- 원본 데이터 테이블 헤더 -->
+  <rect x="50" y="80" width="300" height="30" fill="#3498db" stroke="#2980b9"/>
+  <text x="80" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">순번</text>
+  <text x="150" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">JOB</text>
+  <text x="280" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">DEPTNO</text>
+  
+  <!-- 원본 데이터 행들 -->
+  <!-- 1. CLERK, 20 -->
+  <rect x="50" y="110" width="300" height="25" fill="#ecf0f1" stroke="#bdc3c7"/>
+  <text x="80" y="127" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">1</text>
+  <text x="150" y="127" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="280" y="127" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 2. SALESMAN, 30 -->
+  <rect x="50" y="135" width="300" height="25" fill="#ffe6e6" stroke="#bdc3c7"/>
+  <text x="80" y="152" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">2</text>
+  <text x="150" y="152" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">SALESMAN</text>
+  <text x="280" y="152" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 3. SALESMAN, 30 -->
+  <rect x="50" y="160" width="300" height="25" fill="#ffe6e6" stroke="#e74c3c" stroke-width="2"/>
+  <text x="80" y="177" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">3</text>
+  <text x="150" y="177" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">SALESMAN</text>
+  <text x="280" y="177" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 4. MANAGER, 20 -->
+  <rect x="50" y="185" width="300" height="25" fill="#e6f3ff" stroke="#bdc3c7"/>
+  <text x="80" y="202" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">4</text>
+  <text x="150" y="202" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER</text>
+  <text x="280" y="202" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 5. SALESMAN, 30 -->
+  <rect x="50" y="210" width="300" height="25" fill="#ffe6e6" stroke="#e74c3c" stroke-width="2"/>
+  <text x="80" y="227" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">5</text>
+  <text x="150" y="227" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">SALESMAN</text>
+  <text x="280" y="227" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 6. MANAGER, 30 -->
+  <rect x="50" y="235" width="300" height="25" fill="#e6f3ff" stroke="#bdc3c7"/>
+  <text x="80" y="252" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">6</text>
+  <text x="150" y="252" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER</text>
+  <text x="280" y="252" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 7. MANAGER, 10 -->
+  <rect x="50" y="260" width="300" height="25" fill="#e6f3ff" stroke="#bdc3c7"/>
+  <text x="80" y="277" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">7</text>
+  <text x="150" y="277" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER</text>
+  <text x="280" y="277" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  
+  <!-- 8. ANALYST, 20 -->
+  <rect x="50" y="285" width="300" height="25" fill="#f0e6ff" stroke="#bdc3c7"/>
+  <text x="80" y="302" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">8</text>
+  <text x="150" y="302" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">ANALYST</text>
+  <text x="280" y="302" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 9. PRESIDENT, 10 -->
+  <rect x="50" y="310" width="300" height="25" fill="#fff2e6" stroke="#bdc3c7"/>
+  <text x="80" y="327" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">9</text>
+  <text x="150" y="327" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">PRESIDENT</text>
+  <text x="280" y="327" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  
+  <!-- 10. SALESMAN, 30 -->
+  <rect x="50" y="335" width="300" height="25" fill="#ffe6e6" stroke="#e74c3c" stroke-width="2"/>
+  <text x="80" y="352" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  <text x="150" y="352" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">SALESMAN</text>
+  <text x="280" y="352" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 11. CLERK, 20 -->
+  <rect x="50" y="360" width="300" height="25" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2"/>
+  <text x="80" y="377" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">11</text>
+  <text x="150" y="377" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="280" y="377" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 12. CLERK, 30 -->
+  <rect x="50" y="385" width="300" height="25" fill="#ecf0f1" stroke="#bdc3c7"/>
+  <text x="80" y="402" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">12</text>
+  <text x="150" y="402" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="280" y="402" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 13. ANALYST, 20 -->
+  <rect x="50" y="410" width="300" height="25" fill="#f0e6ff" stroke="#9b59b6" stroke-width="2"/>
+  <text x="80" y="427" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">13</text>
+  <text x="150" y="427" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">ANALYST</text>
+  <text x="280" y="427" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 14. CLERK, 10 -->
+  <rect x="50" y="435" width="300" height="25" fill="#ecf0f1" stroke="#bdc3c7"/>
+  <text x="80" y="452" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">14</text>
+  <text x="150" y="452" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="280" y="452" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  
+  <!-- 화살표 -->
+  <path d="M 370 300 Q 500 250 630 300" stroke="#34495e" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="500" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#e74c3c">
+    DISTINCT
+  </text>
+  <text x="500" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#e74c3c">
+    중복 제거
+  </text>
+  
+  <!-- 결과 데이터 섹션 -->
+  <text x="850" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#27ae60">
+    결과 데이터 (9행)
+  </text>
+  
+  <!-- 결과 데이터 테이블 헤더 -->
+  <rect x="700" y="80" width="300" height="30" fill="#27ae60" stroke="#229954"/>
+  <text x="730" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">순번</text>
+  <text x="800" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">JOB</text>
+  <text x="930" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">DEPTNO</text>
+  
+  <!-- 결과 데이터 행들 -->
+  <!-- 1. CLERK, 20 -->
+  <rect x="700" y="110" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="127" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">1</text>
+  <text x="800" y="127" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="930" y="127" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 2. SALESMAN, 30 -->
+  <rect x="700" y="135" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="152" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">2</text>
+  <text x="800" y="152" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">SALESMAN</text>
+  <text x="930" y="152" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 3. MANAGER, 20 -->
+  <rect x="700" y="160" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="177" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">3</text>
+  <text x="800" y="177" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER</text>
+  <text x="930" y="177" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 4. MANAGER, 30 -->
+  <rect x="700" y="185" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="202" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">4</text>
+  <text x="800" y="202" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER</text>
+  <text x="930" y="202" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 5. MANAGER, 10 -->
+  <rect x="700" y="210" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="227" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">5</text>
+  <text x="800" y="227" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER</text>
+  <text x="930" y="227" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  
+  <!-- 6. ANALYST, 20 -->
+  <rect x="700" y="235" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="252" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">6</text>
+  <text x="800" y="252" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">ANALYST</text>
+  <text x="930" y="252" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">20</text>
+  
+  <!-- 7. PRESIDENT, 10 -->
+  <rect x="700" y="260" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="277" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">7</text>
+  <text x="800" y="277" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">PRESIDENT</text>
+  <text x="930" y="277" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  
+  <!-- 8. CLERK, 30 -->
+  <rect x="700" y="285" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="302" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">8</text>
+  <text x="800" y="302" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="930" y="302" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">30</text>
+  
+  <!-- 9. CLERK, 10 -->
+  <rect x="700" y="310" width="300" height="25" fill="#d5f4e6" stroke="#27ae60"/>
+  <text x="730" y="327" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">9</text>
+  <text x="800" y="327" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK</text>
+  <text x="930" y="327" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">10</text>
+  
+  <!-- 설명 섹션 -->
+  <rect x="50" y="500" width="950" height="280" fill="#ffffff" stroke="#bdc3c7" rx="5"/>
+  <text x="525" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">
+    중복 제거 과정 설명
+  </text>
+  
+  <!-- 색상 범례 -->
+  <rect x="70" y="540" width="20" height="15" fill="#ffe6e6" stroke="#e74c3c"/>
+  <text x="100" y="552" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">SALESMAN+30: 행 2,3,5,10 → 1개로 합쳐짐</text>
+  
+  <rect x="70" y="560" width="20" height="15" fill="#ecf0f1" stroke="#95a5a6"/>
+  <text x="100" y="572" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">CLERK+20: 행 1,11 → 1개로 합쳐짐</text>
+  
+  <rect x="70" y="580" width="20" height="15" fill="#f0e6ff" stroke="#9b59b6"/>
+  <text x="100" y="592" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">ANALYST+20: 행 8,13 → 1개로 합쳐짐</text>
+  
+  <rect x="70" y="600" width="20" height="15" fill="#e6f3ff" stroke="#3498db"/>
+  <text x="100" y="612" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">MANAGER: 각각 다른 부서(10,20,30)이므로 3개 모두 유지</text>
+  
+  <!-- 핵심 포인트 -->
+  <text x="70" y="640" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#e74c3c">
+    ★ 핵심 포인트:
+  </text>
+  <text x="70" y="660" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+    • DISTINCT는 선택된 모든 컬럼의 조합을 하나의 단위로 취급합니다
+  </text>
+  <text x="70" y="675" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+    • (JOB, DEPTNO) 쌍이 완전히 동일한 경우에만 중복으로 간주됩니다
+  </text>
+  <text x="70" y="690" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+    • MANAGER가 3번 나오는 이유: 부서가 다르면 서로 다른 조합으로 취급
+  </text>
+  <text x="70" y="705" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+    • SALESMAN이 1번만 나오는 이유: 모두 30번 부서로 동일한 조합
+  </text>
+  
+  <!-- 결과 요약 -->
+  <rect x="500" y="720" width="450" height="50" fill="#f8f9fa" stroke="#bdc3c7" rx="3"/>
+  <text x="525" y="740" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27ae60">
+    결과: 원본 14행 → DISTINCT 적용 후 9행
+  </text>
+  <text x="525" y="755" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+    5개의 중복 조합이 제거되어 9개의 고유한 (JOB, DEPTNO) 조합만 남음
+  </text>
+  
+  <!-- 화살표 마커 정의 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34495e"/>
+    </marker>
+  </defs>
+</svg>
