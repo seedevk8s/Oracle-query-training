@@ -1,0 +1,358 @@
+<svg viewBox="0 0 1400 2000" xmlns="http://www.w3.org/2000/svg">
+  <!-- 스타일 정의 -->
+  <defs>
+    <style>
+      .title { font: bold 20px sans-serif; fill: #2c3e50; }
+      .subtitle { font: bold 14px sans-serif; fill: #34495e; }
+      .label { font: 12px sans-serif; fill: #2c3e50; }
+      .code { font: 10px monospace; fill: #27ae60; }
+      .warning { font: 11px sans-serif; fill: #e74c3c; }
+      .note { font: 10px sans-serif; fill: #3498db; }
+      .result { font: 10px sans-serif; fill: #7f8c8d; }
+    </style>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1400" height="2000" fill="#f5f5f5"/>
+  
+  <!-- 전체 제목 -->
+  <text x="700" y="30" class="title" text-anchor="middle">SQL JOIN 16문제 벤다이어그램 요약</text>
+
+  <!-- 1. 카티션 곱 (실습 8-1) -->
+  <g transform="translate(50, 60)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-1: 카티션 곱 (Cartesian Product)</text>
+    <!-- EMP 테이블 (14개) -->
+    <rect x="10" y="30" width="120" height="80" fill="#ffcccc" stroke="#ff0000" stroke-width="2"/>
+    <text x="70" y="70" class="label" text-anchor="middle">EMP (14)</text>
+    <!-- DEPT 테이블 (4개) -->
+    <rect x="170" y="30" width="120" height="80" fill="#ccccff" stroke="#0000ff" stroke-width="2"/>
+    <text x="230" y="70" class="label" text-anchor="middle">DEPT (4)</text>
+    <!-- 결과 -->
+    <text x="150" y="130" class="code" text-anchor="middle">WHERE 절 없음</text>
+    <text x="150" y="145" class="result" text-anchor="middle">결과: 14 × 4 = 56행</text>
+    <text x="150" y="160" class="warning" text-anchor="middle">⚠️ 실무 사용 금지!</text>
+  </g>
+
+  <!-- 2. 등가 조인 (실습 8-2, 8-3, 8-5, 8-6) -->
+  <g transform="translate(350, 60)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-2,3,5,6: 등가 조인 (INNER JOIN)</text>
+    <!-- 벤다이어그램 -->
+    <circle cx="100" cy="80" r="40" fill="#ffcccc" stroke="#ff0000" stroke-width="2" opacity="0.6"/>
+    <circle cx="150" cy="80" r="40" fill="#ccccff" stroke="#0000ff" stroke-width="2" opacity="0.6"/>
+    <text x="70" y="85" class="label">EMP</text>
+    <text x="180" y="85" class="label">DEPT</text>
+    <!-- 교집합 강조 -->
+    <path d="M 110,50 A 40,40 0 0,1 140,50 A 40,40 0 0,1 110,50" fill="#9966ff" opacity="0.8"/>
+    <path d="M 110,110 A 40,40 0 0,0 140,110 A 40,40 0 0,0 110,110" fill="#9966ff" opacity="0.8"/>
+    
+    <text x="125" y="130" class="code" text-anchor="middle">WHERE E.DEPTNO = D.DEPTNO</text>
+    <text x="125" y="145" class="result" text-anchor="middle">결과: 14행 (매칭되는 것만)</text>
+    <text x="125" y="160" class="note" text-anchor="middle">✓ 가장 일반적인 조인</text>
+  </g>
+
+  <!-- 3. 비등가 조인 (실습 8-7) -->
+  <g transform="translate(650, 60)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-7: 비등가 조인 (Non-Equi)</text>
+    <!-- 범위 표현 -->
+    <rect x="50" y="40" width="200" height="30" fill="#ffffcc" stroke="#ffcc00" stroke-width="2"/>
+    <text x="150" y="58" class="label" text-anchor="middle">SALGRADE (등급범위)</text>
+    <!-- EMP 급여 점들 -->
+    <circle cx="80" cy="90" r="5" fill="#ff6666"/>
+    <circle cx="120" cy="90" r="5" fill="#ff6666"/>
+    <circle cx="160" cy="90" r="5" fill="#ff6666"/>
+    <circle cx="200" cy="90" r="5" fill="#ff6666"/>
+    <circle cx="220" cy="90" r="5" fill="#ff6666"/>
+    <text x="150" y="105" class="label" text-anchor="middle">EMP.SAL (급여)</text>
+    
+    <text x="150" y="130" class="code" text-anchor="middle">WHERE E.SAL BETWEEN</text>
+    <text x="150" y="145" class="code" text-anchor="middle">S.LOSAL AND S.HISAL</text>
+    <text x="150" y="160" class="note" text-anchor="middle">범위 조건 매칭</text>
+  </g>
+
+  <!-- 4. 자체 조인 (실습 8-8) -->
+  <g transform="translate(950, 60)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-8: 자체 조인 (Self Join)</text>
+    <!-- 같은 테이블을 두 번 -->
+    <ellipse cx="125" cy="80" rx="50" ry="35" fill="#ccffcc" stroke="#00cc00" stroke-width="2" opacity="0.6"/>
+    <text x="125" y="75" class="label" text-anchor="middle">EMP as E1</text>
+    <text x="125" y="90" class="label" text-anchor="middle">(사원)</text>
+    <!-- 화살표 -->
+    <path d="M 100,50 Q 50,50 50,80 Q 50,110 100,110" stroke="#00cc00" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <text x="30" y="85" class="label">EMP as E2</text>
+    <text x="30" y="100" class="label">(매니저)</text>
+    
+    <text x="125" y="130" class="code" text-anchor="middle">WHERE E1.MGR = E2.EMPNO</text>
+    <text x="125" y="145" class="result" text-anchor="middle">결과: 13행 (KING 제외)</text>
+    <text x="125" y="160" class="note" text-anchor="middle">계층 구조 표현</text>
+  </g>
+
+  <!-- 5. LEFT OUTER JOIN (실습 8-9, 8-14) -->
+  <g transform="translate(50, 250)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-9, 8-14: LEFT OUTER JOIN</text>
+    <!-- 벤다이어그램 -->
+    <circle cx="100" cy="80" r="40" fill="#ffcccc" stroke="#ff0000" stroke-width="2" opacity="0.6"/>
+    <circle cx="150" cy="80" r="40" fill="none" stroke="#0000ff" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+    <text x="70" y="85" class="label">E1(사원)</text>
+    <text x="180" y="85" class="label">E2(매니저)</text>
+    <!-- 교집합 -->
+    <path d="M 110,50 A 40,40 0 0,1 140,50 A 40,40 0 0,1 110,50" fill="#9966ff" opacity="0.5"/>
+    <path d="M 110,110 A 40,40 0 0,0 140,110 A 40,40 0 0,0 110,110" fill="#9966ff" opacity="0.5"/>
+    
+    <text x="125" y="130" class="code" text-anchor="middle">Oracle: E1.MGR = E2.EMPNO(+)</text>
+    <text x="125" y="145" class="code" text-anchor="middle">ANSI: E1 LEFT JOIN E2</text>
+    <text x="125" y="160" class="result" text-anchor="middle">결과: 14행 (KING 포함)</text>
+    <text x="125" y="175" class="note" text-anchor="middle">왼쪽 테이블 전체 + 매칭</text>
+  </g>
+
+  <!-- 6. RIGHT OUTER JOIN (실습 8-10, 8-15) -->
+  <g transform="translate(350, 250)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-10, 8-15: RIGHT OUTER JOIN</text>
+    <!-- 벤다이어그램 -->
+    <circle cx="100" cy="80" r="40" fill="none" stroke="#ff0000" stroke-width="2" stroke-dasharray="5,5" opacity="0.6"/>
+    <circle cx="150" cy="80" r="40" fill="#ccccff" stroke="#0000ff" stroke-width="2" opacity="0.6"/>
+    <text x="70" y="85" class="label">E1(부하)</text>
+    <text x="180" y="85" class="label">E2(매니저)</text>
+    <!-- 교집합 -->
+    <path d="M 110,50 A 40,40 0 0,1 140,50 A 40,40 0 0,1 110,50" fill="#9966ff" opacity="0.5"/>
+    <path d="M 110,110 A 40,40 0 0,0 140,110 A 40,40 0 0,0 110,110" fill="#9966ff" opacity="0.5"/>
+    
+    <text x="125" y="130" class="code" text-anchor="middle">Oracle: E1.MGR(+) = E2.EMPNO</text>
+    <text x="125" y="145" class="code" text-anchor="middle">ANSI: E1 RIGHT JOIN E2</text>
+    <text x="125" y="160" class="result" text-anchor="middle">부하직원 없는 사원 찾기</text>
+    <text x="125" y="175" class="note" text-anchor="middle">오른쪽 테이블 전체 + 매칭</text>
+  </g>
+
+  <!-- 7. FULL OUTER JOIN (실습 8-16) -->
+  <g transform="translate(650, 250)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-16: FULL OUTER JOIN</text>
+    <!-- 벤다이어그램 -->
+    <circle cx="100" cy="80" r="40" fill="#ffcccc" stroke="#ff0000" stroke-width="2" opacity="0.6"/>
+    <circle cx="150" cy="80" r="40" fill="#ccccff" stroke="#0000ff" stroke-width="2" opacity="0.6"/>
+    <text x="70" y="85" class="label">E1</text>
+    <text x="180" y="85" class="label">E2</text>
+    
+    <text x="125" y="130" class="code" text-anchor="middle">E1 FULL OUTER JOIN E2</text>
+    <text x="125" y="145" class="result" text-anchor="middle">양쪽 모두 포함</text>
+    <text x="125" y="160" class="note" text-anchor="middle">Oracle (+)로는 불가능</text>
+    <text x="125" y="175" class="warning" text-anchor="middle">⚠️ 성능 주의</text>
+  </g>
+
+  <!-- 8. NATURAL JOIN (실습 8-11) -->
+  <g transform="translate(950, 250)">
+    <text x="150" y="20" class="subtitle" text-anchor="middle">실습 8-11: NATURAL JOIN</text>
+    <!-- 위험 표시 -->
+    <rect x="75" y="40" width="150" height="100" fill="#ffdddd" stroke="#ff0000" stroke-width="3"/>
+    <text x="150" y="65" class="warning" text-anchor="middle">⛔ 사용 금지!</text>
+    <text x="150" y="85" class="label" text-anchor="middle">자동 조인 = 위험</text>
+    <text x="150" y="105" class="label" text-anchor="middle">조인 조건 숨겨짐</text>
+    <text x="150" y="125" class="label" text-anchor="middle">테이블 변경시 장애</text>
+    
+    <text x="150" y="155" class="code" text-anchor="middle">EMP NATURAL JOIN DEPT</text>
+    <text x="150" y="170" class="warning" text-anchor="middle">실제 장애 사례 다수!</text>
+  </g>
+
+  <!-- JOIN 방식 비교 테이블 -->
+  <g transform="translate(50, 450)">
+    <text x="650" y="20" class="title" text-anchor="middle">JOIN 방식별 비교 매트릭스</text>
+    
+    <!-- 헤더 -->
+    <rect x="0" y="40" width="1300" height="30" fill="#343a40"/>
+    <text x="100" y="58" class="label" fill="white" text-anchor="middle">JOIN 유형</text>
+    <text x="300" y="58" class="label" fill="white" text-anchor="middle">Oracle 구문</text>
+    <text x="500" y="58" class="label" fill="white" text-anchor="middle">ANSI 구문</text>
+    <text x="700" y="58" class="label" fill="white" text-anchor="middle">결과</text>
+    <text x="900" y="58" class="label" fill="white" text-anchor="middle">NULL 처리</text>
+    <text x="1100" y="58" class="label" fill="white" text-anchor="middle">실무 추천도</text>
+    
+    <!-- INNER JOIN -->
+    <rect x="0" y="70" width="1300" height="40" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="100" y="95" class="label" text-anchor="middle">INNER JOIN</text>
+    <text x="300" y="95" class="code" text-anchor="middle">WHERE A.ID = B.ID</text>
+    <text x="500" y="95" class="code" text-anchor="middle">A JOIN B ON A.ID = B.ID</text>
+    <text x="700" y="95" class="label" text-anchor="middle">매칭되는 것만</text>
+    <text x="900" y="95" class="label" text-anchor="middle">제외</text>
+    <text x="1100" y="95" class="note" text-anchor="middle">⭐⭐⭐⭐⭐</text>
+    
+    <!-- LEFT OUTER -->
+    <rect x="0" y="110" width="1300" height="40" fill="white" stroke="#dee2e6"/>
+    <text x="100" y="135" class="label" text-anchor="middle">LEFT OUTER</text>
+    <text x="300" y="135" class="code" text-anchor="middle">WHERE A.ID = B.ID(+)</text>
+    <text x="500" y="135" class="code" text-anchor="middle">A LEFT JOIN B ON ...</text>
+    <text x="700" y="135" class="label" text-anchor="middle">왼쪽 전체</text>
+    <text x="900" y="135" class="label" text-anchor="middle">오른쪽 NULL</text>
+    <text x="1100" y="135" class="note" text-anchor="middle">⭐⭐⭐⭐⭐</text>
+    
+    <!-- RIGHT OUTER -->
+    <rect x="0" y="150" width="1300" height="40" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="100" y="175" class="label" text-anchor="middle">RIGHT OUTER</text>
+    <text x="300" y="175" class="code" text-anchor="middle">WHERE A.ID(+) = B.ID</text>
+    <text x="500" y="175" class="code" text-anchor="middle">A RIGHT JOIN B ON ...</text>
+    <text x="700" y="175" class="label" text-anchor="middle">오른쪽 전체</text>
+    <text x="900" y="175" class="label" text-anchor="middle">왼쪽 NULL</text>
+    <text x="1100" y="175" class="note" text-anchor="middle">⭐⭐⭐</text>
+    
+    <!-- FULL OUTER -->
+    <rect x="0" y="190" width="1300" height="40" fill="white" stroke="#dee2e6"/>
+    <text x="100" y="215" class="label" text-anchor="middle">FULL OUTER</text>
+    <text x="300" y="215" class="warning" text-anchor="middle">불가능</text>
+    <text x="500" y="215" class="code" text-anchor="middle">A FULL JOIN B ON ...</text>
+    <text x="700" y="215" class="label" text-anchor="middle">양쪽 전체</text>
+    <text x="900" y="215" class="label" text-anchor="middle">양쪽 NULL 가능</text>
+    <text x="1100" y="215" class="note" text-anchor="middle">⭐⭐</text>
+    
+    <!-- CROSS JOIN -->
+    <rect x="0" y="230" width="1300" height="40" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="100" y="255" class="label" text-anchor="middle">CROSS JOIN</text>
+    <text x="300" y="255" class="code" text-anchor="middle">WHERE 1=1 (또는 생략)</text>
+    <text x="500" y="255" class="code" text-anchor="middle">A CROSS JOIN B</text>
+    <text x="700" y="255" class="label" text-anchor="middle">카티션 곱</text>
+    <text x="900" y="255" class="label" text-anchor="middle">해당 없음</text>
+    <text x="1100" y="255" class="warning" text-anchor="middle">⛔</text>
+    
+    <!-- NATURAL JOIN -->
+    <rect x="0" y="270" width="1300" height="40" fill="#ffdddd" stroke="#ff0000"/>
+    <text x="100" y="295" class="label" text-anchor="middle">NATURAL JOIN</text>
+    <text x="300" y="295" class="label" text-anchor="middle">해당 없음</text>
+    <text x="500" y="295" class="code" text-anchor="middle">A NATURAL JOIN B</text>
+    <text x="700" y="295" class="label" text-anchor="middle">자동 매칭</text>
+    <text x="900" y="295" class="label" text-anchor="middle">제외</text>
+    <text x="1100" y="295" class="warning" text-anchor="middle">⛔ 절대 금지</text>
+  </g>
+
+  <!-- JOIN 선택 가이드 -->
+  <g transform="translate(50, 800)">
+    <text x="650" y="20" class="title" text-anchor="middle">JOIN 선택 플로우차트</text>
+    
+    <!-- 시작 -->
+    <rect x="575" y="50" width="150" height="40" fill="#28a745" stroke="#1e7e34" stroke-width="2" rx="5"/>
+    <text x="650" y="75" class="label" fill="white" text-anchor="middle">JOIN 필요?</text>
+    
+    <!-- 두 테이블 같은가? -->
+    <rect x="375" y="130" width="150" height="40" fill="#ffc107" stroke="#d39e00" stroke-width="2" rx="5"/>
+    <text x="450" y="155" class="label" text-anchor="middle">같은 테이블?</text>
+    
+    <rect x="775" y="130" width="150" height="40" fill="#ffc107" stroke="#d39e00" stroke-width="2" rx="5"/>
+    <text x="850" y="155" class="label" text-anchor="middle">다른 테이블?</text>
+    
+    <!-- Self Join -->
+    <rect x="375" y="210" width="150" height="40" fill="#6f42c1" stroke="#563d7c" stroke-width="2" rx="5"/>
+    <text x="450" y="235" class="label" fill="white" text-anchor="middle">SELF JOIN</text>
+    
+    <!-- 모든 데이터 필요? -->
+    <rect x="775" y="210" width="150" height="40" fill="#17a2b8" stroke="#138496" stroke-width="2" rx="5"/>
+    <text x="850" y="235" class="label" fill="white" text-anchor="middle">모든 행 필요?</text>
+    
+    <!-- 매칭만 -->
+    <rect x="675" y="290" width="150" height="40" fill="#28a745" stroke="#1e7e34" stroke-width="2" rx="5"/>
+    <text x="750" y="315" class="label" fill="white" text-anchor="middle">INNER JOIN</text>
+    
+    <!-- 한쪽 전체 -->
+    <rect x="875" y="290" width="150" height="40" fill="#007bff" stroke="#0056b3" stroke-width="2" rx="5"/>
+    <text x="950" y="315" class="label" fill="white" text-anchor="middle">LEFT JOIN</text>
+    
+    <!-- 양쪽 전체 -->
+    <rect x="1075" y="290" width="150" height="40" fill="#6f42c1" stroke="#563d7c" stroke-width="2" rx="5"/>
+    <text x="1150" y="315" class="label" fill="white" text-anchor="middle">FULL JOIN</text>
+    
+    <!-- 화살표 -->
+    <line x1="650" y1="90" x2="450" y2="130" stroke="#333" stroke-width="2"/>
+    <line x1="650" y1="90" x2="850" y2="130" stroke="#333" stroke-width="2"/>
+    <line x1="450" y1="170" x2="450" y2="210" stroke="#333" stroke-width="2"/>
+    <line x1="850" y1="170" x2="850" y2="210" stroke="#333" stroke-width="2"/>
+    <line x1="850" y1="250" x2="750" y2="290" stroke="#333" stroke-width="2"/>
+    <line x1="850" y1="250" x2="950" y2="290" stroke="#333" stroke-width="2"/>
+    <line x1="850" y1="250" x2="1150" y2="290" stroke="#333" stroke-width="2"/>
+    
+    <!-- 라벨 -->
+    <text x="550" y="110" class="note">YES</text>
+    <text x="750" y="110" class="note">YES</text>
+    <text x="450" y="195" class="note">계층구조</text>
+    <text x="780" y="275" class="note">매칭만</text>
+    <text x="900" y="275" class="note">한쪽전체</text>
+    <text x="1000" y="275" class="note">양쪽전체</text>
+  </g>
+
+  <!-- 중요 포인트 요약 -->
+  <g transform="translate(50, 1150)">
+    <text x="650" y="20" class="title" text-anchor="middle">핵심 포인트 요약</text>
+    
+    <!-- Best Practice -->
+    <rect x="50" y="50" width="400" height="200" fill="#d4edda" stroke="#28a745" stroke-width="2" rx="10"/>
+    <text x="250" y="75" class="subtitle" text-anchor="middle">✅ Best Practice</text>
+    <text x="70" y="100" class="label">1. JOIN ON 사용 (가장 유연함)</text>
+    <text x="70" y="120" class="label">2. 테이블 별칭 항상 사용</text>
+    <text x="70" y="140" class="label">3. 조인 조건 명시적 표현</text>
+    <text x="70" y="160" class="label">4. ANSI 표준 우선 사용</text>
+    <text x="70" y="180" class="label">5. LEFT JOIN 선호 (RIGHT 대신)</text>
+    <text x="70" y="200" class="label">6. 조인 조건과 필터 조건 구분</text>
+    <text x="70" y="220" class="label">7. 인덱스 활용 고려</text>
+    
+    <!-- 주의사항 -->
+    <rect x="500" y="50" width="400" height="200" fill="#f8d7da" stroke="#dc3545" stroke-width="2" rx="10"/>
+    <text x="700" y="75" class="subtitle" text-anchor="middle">⚠️ 주의사항</text>
+    <text x="520" y="100" class="warning">1. NATURAL JOIN 절대 금지!</text>
+    <text x="520" y="120" class="warning">2. 카티션 곱 실수 방지</text>
+    <text x="520" y="140" class="warning">3. NULL 처리 주의</text>
+    <text x="520" y="160" class="warning">4. FULL JOIN 성능 고려</text>
+    <text x="520" y="180" class="warning">5. 컬럼명 충돌 확인</text>
+    <text x="520" y="200" class="warning">6. (+) 위치 혼동 주의</text>
+    <text x="520" y="220" class="warning">7. 대용량 테이블 조인시 성능</text>
+    
+    <!-- 실무 팁 -->
+    <rect x="950" y="50" width="400" height="200" fill="#cce5ff" stroke="#007bff" stroke-width="2" rx="10"/>
+    <text x="1150" y="75" class="subtitle" text-anchor="middle">💡 실무 팁</text>
+    <text x="970" y="100" class="note">1. 개발: JOIN ON 일관되게 사용</text>
+    <text x="970" y="120" class="note">2. 디버깅: 조인 전 각 테이블 확인</text>
+    <text x="970" y="140" class="note">3. 성능: EXPLAIN PLAN 활용</text>
+    <text x="970" y="160" class="note">4. 유지보수: 명확한 별칭 사용</text>
+    <text x="970" y="180" class="note">5. 협업: ANSI 표준 준수</text>
+    <text x="970" y="200" class="note">6. 검증: 카운트로 결과 확인</text>
+    <text x="970" y="220" class="note">7. 문서화: 복잡한 조인 주석 추가</text>
+  </g>
+
+  <!-- 실습별 핵심 한 줄 요약 -->
+  <g transform="translate(50, 1450)">
+    <text x="650" y="20" class="title" text-anchor="middle">16개 실습 한 줄 요약</text>
+    
+    <rect x="50" y="40" width="1300" height="480" fill="white" stroke="#dee2e6" stroke-width="2" rx="5"/>
+    
+    <text x="70" y="70" class="subtitle">기본 조인:</text>
+    <text x="90" y="95" class="label">8-1: 카티션 곱 - WHERE 없으면 모든 조합 (14×4=56행) ⛔</text>
+    <text x="90" y="115" class="label">8-2: 등가 조인 - WHERE로 조인 조건 (14행) ✓</text>
+    <text x="90" y="135" class="label">8-3: 테이블 별칭 - 코드 간결화 (E, D) ✓</text>
+    <text x="90" y="155" class="label">8-4: 컬럼 충돌 - DEPTNO 애매함 오류 체험</text>
+    <text x="90" y="175" class="label">8-5: 명확한 지정 - 테이블.컬럼으로 해결 ✓</text>
+    <text x="90" y="195" class="label">8-6: 조인+필터 - WHERE에 AND로 조건 추가 ✓</text>
+    
+    <text x="70" y="225" class="subtitle">특수 조인:</text>
+    <text x="90" y="250" class="label">8-7: 비등가 조인 - BETWEEN으로 범위 매칭 (급여등급)</text>
+    <text x="90" y="270" class="label">8-8: 자체 조인 - 같은 테이블 두 번 사용 (사원-매니저)</text>
+    
+    <text x="70" y="300" class="subtitle">외부 조인 (Oracle):</text>
+    <text x="90" y="325" class="label">8-9: LEFT OUTER - (+)를 오른쪽에, 왼쪽 전체 (KING 포함)</text>
+    <text x="90" y="345" class="label">8-10: RIGHT OUTER - (+)를 왼쪽에, 오른쪽 전체 (부하없는 사원)</text>
+    
+    <text x="70" y="375" class="subtitle">ANSI 표준:</text>
+    <text x="90" y="400" class="label">8-11: NATURAL JOIN - 자동 조인, 위험! 절대 금지! ⛔⛔⛔</text>
+    <text x="90" y="420" class="label">8-12: JOIN USING - 조인 컬럼 명시, 별칭 불가 ⭕</text>
+    <text x="90" y="440" class="label">8-13: JOIN ON - 가장 유연하고 명확, 강력 추천! ⭐⭐⭐⭐⭐</text>
+    <text x="90" y="460" class="label">8-14: LEFT JOIN - ANSI 표준 왼쪽 외부 조인 ✓</text>
+    <text x="90" y="480" class="label">8-15: RIGHT JOIN - ANSI 표준 오른쪽 외부 조인 (LEFT 선호)</text>
+    <text x="90" y="500" class="label">8-16: FULL JOIN - 양쪽 모두 포함, Oracle (+) 불가</text>
+  </g>
+
+  <!-- 최종 권장사항 -->
+  <g transform="translate(50, 1980)">
+    <rect x="0" y="0" width="1300" height="40" fill="#343a40" rx="5"/>
+    <text x="650" y="25" class="subtitle" fill="white" text-anchor="middle">
+      🎯 최종 권장: JOIN ON 사용 | NATURAL JOIN 금지 | 외부조인은 LEFT JOIN | 조인조건과 필터조건 구분 | 항상 별칭 사용
+    </text>
+  </g>
+
+  <!-- 화살표 마커 정의 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+</svg>
