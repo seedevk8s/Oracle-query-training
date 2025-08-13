@@ -1,0 +1,188 @@
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- 제목 -->
+  <text x="450" y="30" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">
+    LEFT OUTER JOIN 동작 원리
+  </text>
+  <text x="450" y="55" font-size="14" text-anchor="middle" fill="#666">
+    DEPT D LEFT OUTER JOIN EMP E ON D.DEPTNO = E.DEPTNO
+  </text>
+  
+  <!-- 설명 박스 -->
+  <rect x="50" y="70" width="800" height="50" fill="#E8F4FD" stroke="#4A90E2" stroke-width="2" rx="5"/>
+  <text x="60" y="95" font-size="13" fill="#333" font-weight="bold">LEFT JOIN 읽는 방법:</text>
+  <text x="60" y="110" font-size="12" fill="#333">"DEPT 테이블의 모든 행을 기준으로, EMP 테이블에서 매칭되는 데이터를 찾아서 결합한다"</text>
+  
+  <!-- DEPT 테이블 (기준 테이블) -->
+  <g id="dept-table">
+    <rect x="50" y="150" width="250" height="30" fill="#4A90E2" stroke="#333" stroke-width="2"/>
+    <text x="175" y="170" font-size="14" font-weight="bold" text-anchor="middle" fill="white">DEPT 테이블 (기준/왼쪽)</text>
+    
+    <!-- 기준 표시 -->
+    <circle cx="30" cy="165" r="15" fill="#FFD700" stroke="#333" stroke-width="2"/>
+    <text x="30" y="170" font-size="12" font-weight="bold" text-anchor="middle">主</text>
+    
+    <!-- 헤더 -->
+    <rect x="50" y="180" width="250" height="25" fill="#E8F4FD" stroke="#333"/>
+    <text x="100" y="197" font-size="12" text-anchor="middle" font-weight="bold">DEPTNO</text>
+    <text x="175" y="197" font-size="12" text-anchor="middle">DNAME</text>
+    <text x="250" y="197" font-size="12" text-anchor="middle">LOC</text>
+    
+    <!-- 데이터 -->
+    <rect x="50" y="205" width="250" height="25" fill="white" stroke="#333"/>
+    <circle cx="70" cy="217" r="8" fill="#4A90E2" opacity="0.3"/>
+    <text x="70" y="222" font-size="10" text-anchor="middle" font-weight="bold">①</text>
+    <text x="100" y="222" font-size="11" text-anchor="middle">10</text>
+    <text x="175" y="222" font-size="11" text-anchor="middle">ACCOUNTING</text>
+    <text x="250" y="222" font-size="10" text-anchor="middle">NEW YORK</text>
+    
+    <rect x="50" y="230" width="250" height="25" fill="white" stroke="#333"/>
+    <circle cx="70" cy="242" r="8" fill="#4A90E2" opacity="0.3"/>
+    <text x="70" y="247" font-size="10" text-anchor="middle" font-weight="bold">②</text>
+    <text x="100" y="247" font-size="11" text-anchor="middle">20</text>
+    <text x="175" y="247" font-size="11" text-anchor="middle">RESEARCH</text>
+    <text x="250" y="247" font-size="10" text-anchor="middle">DALLAS</text>
+    
+    <rect x="50" y="255" width="250" height="25" fill="white" stroke="#333"/>
+    <circle cx="70" cy="267" r="8" fill="#4A90E2" opacity="0.3"/>
+    <text x="70" y="272" font-size="10" text-anchor="middle" font-weight="bold">③</text>
+    <text x="100" y="272" font-size="11" text-anchor="middle">30</text>
+    <text x="175" y="272" font-size="11" text-anchor="middle">SALES</text>
+    <text x="250" y="272" font-size="10" text-anchor="middle">CHICAGO</text>
+    
+    <rect x="50" y="280" width="250" height="25" fill="#FFE6E6" stroke="#333" stroke-width="2"/>
+    <circle cx="70" cy="292" r="8" fill="#FF0000" opacity="0.3"/>
+    <text x="70" y="297" font-size="10" text-anchor="middle" font-weight="bold">④</text>
+    <text x="100" y="297" font-size="11" text-anchor="middle" fill="red" font-weight="bold">40</text>
+    <text x="175" y="297" font-size="11" text-anchor="middle" fill="red">OPERATIONS</text>
+    <text x="250" y="297" font-size="10" text-anchor="middle" fill="red">BOSTON</text>
+  </g>
+  
+  <!-- EMP 테이블 (조회 대상) -->
+  <g id="emp-table">
+    <rect x="500" y="150" width="250" height="30" fill="#5CB85C" stroke="#333" stroke-width="2"/>
+    <text x="625" y="170" font-size="14" font-weight="bold" text-anchor="middle" fill="white">EMP 테이블 (조회 대상/오른쪽)</text>
+    
+    <!-- 헤더 -->
+    <rect x="500" y="180" width="250" height="25" fill="#E8FDE8" stroke="#333"/>
+    <text x="550" y="197" font-size="12" text-anchor="middle">EMPNO</text>
+    <text x="625" y="197" font-size="12" text-anchor="middle">ENAME</text>
+    <text x="700" y="197" font-size="12" text-anchor="middle" font-weight="bold">DEPTNO</text>
+    
+    <!-- 데이터 -->
+    <rect x="500" y="205" width="250" height="25" fill="white" stroke="#333"/>
+    <text x="550" y="222" font-size="11" text-anchor="middle">7839</text>
+    <text x="625" y="222" font-size="11" text-anchor="middle">KING</text>
+    <text x="700" y="222" font-size="11" text-anchor="middle" font-weight="bold">10</text>
+    
+    <rect x="500" y="230" width="250" height="25" fill="white" stroke="#333"/>
+    <text x="550" y="247" font-size="11" text-anchor="middle">7566</text>
+    <text x="625" y="247" font-size="11" text-anchor="middle">JONES</text>
+    <text x="700" y="247" font-size="11" text-anchor="middle" font-weight="bold">20</text>
+    
+    <rect x="500" y="255" width="250" height="25" fill="white" stroke="#333"/>
+    <text x="550" y="272" font-size="11" text-anchor="middle">7698</text>
+    <text x="625" y="272" font-size="11" text-anchor="middle">BLAKE</text>
+    <text x="700" y="272" font-size="11" text-anchor="middle" font-weight="bold">30</text>
+    
+    <rect x="500" y="280" width="250" height="25" fill="#F0F0F0" stroke="#333" stroke-dasharray="5,5"/>
+    <text x="625" y="297" font-size="11" text-anchor="middle" fill="#999" font-style="italic">부서 40 사원 없음 (NULL)</text>
+  </g>
+  
+  <!-- 조인 프로세스 설명 -->
+  <g id="join-process">
+    <!-- 화살표는 기준 테이블에서 조회 테이블로 "탐색"하는 과정을 표현 -->
+    <text x="350" y="140" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">조인 탐색 과정</text>
+    
+    <!-- DEPT 10 → EMP 검색 -->
+    <path d="M 300 217 L 350 217 L 350 217 L 450 217 L 450 217 L 500 217" 
+          stroke="#4A90E2" stroke-width="2" fill="none" marker-end="url(#arrowblue)"/>
+    <text x="400" y="212" font-size="10" text-anchor="middle" fill="#4A90E2">매칭 찾음</text>
+    
+    <!-- DEPT 20 → EMP 검색 -->
+    <path d="M 300 242 L 350 242 L 350 242 L 450 242 L 450 242 L 500 242" 
+          stroke="#4A90E2" stroke-width="2" fill="none" marker-end="url(#arrowblue)"/>
+    <text x="400" y="237" font-size="10" text-anchor="middle" fill="#4A90E2">매칭 찾음</text>
+    
+    <!-- DEPT 30 → EMP 검색 -->
+    <path d="M 300 267 L 350 267 L 350 267 L 450 267 L 450 267 L 500 267" 
+          stroke="#4A90E2" stroke-width="2" fill="none" marker-end="url(#arrowblue)"/>
+    <text x="400" y="262" font-size="10" text-anchor="middle" fill="#4A90E2">매칭 찾음</text>
+    
+    <!-- DEPT 40 → EMP 검색 (실패) -->
+    <path d="M 300 292 L 350 292 L 350 292 L 450 292 L 450 292 L 500 292" 
+          stroke="red" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowred)"/>
+    <text x="400" y="287" font-size="10" text-anchor="middle" fill="red">매칭 없음!</text>
+    <text x="400" y="307" font-size="10" text-anchor="middle" fill="red">→ NULL 처리</text>
+  </g>
+  
+  <!-- 화살표 마커 정의 -->
+  <defs>
+    <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4A90E2"/>
+    </marker>
+    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="red"/>
+    </marker>
+  </defs>
+  
+  <!-- 결과 설명 -->
+  <g id="result-explanation">
+    <rect x="50" y="340" width="700" height="100" fill="#FFF9E6" stroke="#F39C12" stroke-width="2" rx="5"/>
+    <text x="60" y="360" font-size="13" font-weight="bold" fill="#333">LEFT JOIN 동작 순서:</text>
+    <text x="70" y="380" font-size="11" fill="#333">1. DEPT 테이블(왼쪽)의 첫 번째 행(부서 10)을 읽음</text>
+    <text x="70" y="395" font-size="11" fill="#333">2. EMP 테이블(오른쪽)에서 DEPTNO = 10인 모든 행을 찾아 결합</text>
+    <text x="70" y="410" font-size="11" fill="#333">3. DEPT 테이블의 다음 행으로 이동하여 반복</text>
+    <text x="70" y="425" font-size="11" fill="red">4. DEPT 40의 경우, EMP에 매칭이 없어도 DEPT 정보는 유지 (EMP 컬럼은 NULL)</text>
+  </g>
+  
+  <!-- 결과 테이블 -->
+  <g id="result-table">
+    <rect x="150" y="460" width="500" height="30" fill="#F39C12" stroke="#333" stroke-width="2"/>
+    <text x="400" y="480" font-size="14" font-weight="bold" text-anchor="middle" fill="white">LEFT JOIN 결과 (GROUP BY 후)</text>
+    
+    <!-- 헤더 -->
+    <rect x="150" y="490" width="500" height="25" fill="#FFF5E6" stroke="#333"/>
+    <text x="200" y="507" font-size="11" text-anchor="middle" font-weight="bold">DEPTNO</text>
+    <text x="300" y="507" font-size="11" text-anchor="middle" font-weight="bold">DNAME</text>
+    <text x="420" y="507" font-size="11" text-anchor="middle" font-weight="bold">COUNT(EMPNO)</text>
+    <text x="550" y="507" font-size="11" text-anchor="middle" font-weight="bold">AVG(SAL)</text>
+    
+    <!-- 데이터 -->
+    <rect x="150" y="515" width="500" height="25" fill="white" stroke="#333"/>
+    <text x="200" y="532" font-size="11" text-anchor="middle">10</text>
+    <text x="300" y="532" font-size="11" text-anchor="middle">ACCOUNTING</text>
+    <text x="420" y="532" font-size="11" text-anchor="middle">3</text>
+    <text x="550" y="532" font-size="11" text-anchor="middle">2916.67</text>
+    
+    <rect x="150" y="540" width="500" height="25" fill="white" stroke="#333"/>
+    <text x="200" y="557" font-size="11" text-anchor="middle">20</text>
+    <text x="300" y="557" font-size="11" text-anchor="middle">RESEARCH</text>
+    <text x="420" y="557" font-size="11" text-anchor="middle">5</text>
+    <text x="550" y="557" font-size="11" text-anchor="middle">2175.00</text>
+    
+    <rect x="150" y="565" width="500" height="25" fill="white" stroke="#333"/>
+    <text x="200" y="582" font-size="11" text-anchor="middle">30</text>
+    <text x="300" y="582" font-size="11" text-anchor="middle">SALES</text>
+    <text x="420" y="582" font-size="11" text-anchor="middle">6</text>
+    <text x="550" y="582" font-size="11" text-anchor="middle">1566.67</text>
+    
+    <rect x="150" y="590" width="500" height="25" fill="#FFE6E6" stroke="#333" stroke-width="2"/>
+    <text x="200" y="607" font-size="11" text-anchor="middle" fill="red" font-weight="bold">40</text>
+    <text x="300" y="607" font-size="11" text-anchor="middle" fill="red">OPERATIONS</text>
+    <text x="420" y="607" font-size="11" text-anchor="middle" fill="red" font-weight="bold">0</text>
+    <text x="550" y="607" font-size="11" text-anchor="middle" fill="red" font-weight="bold">0</text>
+  </g>
+  
+  <!-- 핵심 포인트 -->
+  <g id="key-points">
+    <rect x="50" y="630" width="350" height="60" fill="#E8F4FD" stroke="#4A90E2" stroke-width="2" rx="5"/>
+    <text x="60" y="650" font-size="12" font-weight="bold" fill="#333">💡 핵심 포인트:</text>
+    <text x="60" y="665" font-size="11" fill="#333">• 화살표는 "탐색" 방향 (기준→대상)</text>
+    <text x="60" y="680" font-size="11" fill="#333">• LEFT = 왼쪽 테이블이 기준 (모든 행 보존)</text>
+    
+    <rect x="420" y="630" width="330" height="60" fill="#FFE6E6" stroke="#D9534F" stroke-width="2" rx="5"/>
+    <text x="430" y="650" font-size="12" font-weight="bold" fill="#333">⚠️ INNER JOIN과의 차이:</text>
+    <text x="430" y="665" font-size="11" fill="#333">• INNER JOIN: 매칭되는 것만 출력</text>
+    <text x="430" y="680" font-size="11" fill="#333">• LEFT JOIN: 왼쪽은 무조건 출력</text>
+  </g>
+</svg>
