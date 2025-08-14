@@ -1,0 +1,460 @@
+<svg viewBox="0 0 1600 2400" xmlns="http://www.w3.org/2000/svg">
+  <!-- 스타일 정의 -->
+  <defs>
+    <style>
+      .main-title { font: bold 28px sans-serif; fill: #2c3e50; }
+      .phase-title { font: bold 24px sans-serif; fill: #fff; }
+      .section-title { font: bold 20px sans-serif; fill: #34495e; }
+      .sub-title { font: bold 16px sans-serif; fill: #495057; }
+      .label { font: 14px sans-serif; fill: #2c3e50; }
+      .code { font: 12px monospace; fill: #27ae60; }
+      .error { font: 12px sans-serif; fill: #e74c3c; }
+      .note { font: 12px sans-serif; fill: #3498db; }
+      .small { font: 11px sans-serif; fill: #7f8c8d; }
+      .highlight { font: bold 14px sans-serif; fill: #e67e22; }
+      .result { font: 12px sans-serif; fill: #8e44ad; }
+    </style>
+    
+    <!-- 그라디언트 정의 -->
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 화살표 마커 -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    
+    <!-- 그림자 효과 -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1600" height="2400" fill="#f8f9fa"/>
+  
+  <!-- Phase 2 헤더 -->
+  <rect x="0" y="0" width="1600" height="80" fill="url(#headerGradient)"/>
+  <text x="800" y="45" class="phase-title" text-anchor="middle">Phase 2: 내부조인 - Oracle 방식 (50분)</text>
+  <text x="800" y="70" class="label" fill="white" text-anchor="middle">"전통적인 Oracle 조인 완벽 마스터" - 실습 8-2, 8-3, 8-4, 8-5, 8-6, 8-7, 8-8</text>
+
+  <!-- 내부조인 개념 설명 -->
+  <g transform="translate(50, 110)">
+    <rect x="0" y="0" width="700" height="250" fill="white" stroke="#dee2e6" stroke-width="2" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="700" height="40" fill="#28a745" rx="10"/>
+    <text x="350" y="28" class="phase-title" text-anchor="middle" fill="white">내부조인(INNER JOIN) 개념</text>
+    
+    <!-- 벤다이어그램 -->
+    <circle cx="200" cy="140" r="60" fill="#ffcccc" stroke="#ff0000" stroke-width="3" opacity="0.6"/>
+    <circle cx="280" cy="140" r="60" fill="#ccccff" stroke="#0000ff" stroke-width="3" opacity="0.6"/>
+    <text x="160" y="145" class="label">EMP</text>
+    <text x="320" y="145" class="label">DEPT</text>
+    
+    <!-- 교집합 강조 -->
+    <path d="M 220,90 A 60,60 0 0,1 260,90 A 60,60 0 0,1 220,90" fill="#9966ff" opacity="0.8"/>
+    <path d="M 220,190 A 60,60 0 0,0 260,190 A 60,60 0 0,0 220,190" fill="#9966ff" opacity="0.8"/>
+    <text x="240" y="145" class="label" fill="white" text-anchor="middle">매칭</text>
+    
+    <!-- 설명 -->
+    <text x="400" y="110" class="sub-title">핵심 특징:</text>
+    <text x="410" y="135" class="label">• 양쪽 테이블에 모두 존재하는 데이터만</text>
+    <text x="410" y="155" class="label">• 교집합 (Intersection)</text>
+    <text x="410" y="175" class="label">• NULL 값은 제외됨</text>
+    <text x="410" y="195" class="label">• 가장 일반적인 조인 방식</text>
+    
+    <rect x="50" y="220" width="600" height="25" fill="#d4edda" stroke="#28a745" rx="5"/>
+    <text x="350" y="237" class="highlight" text-anchor="middle">Oracle 방식: WHERE절에 조인 조건 명시</text>
+  </g>
+
+  <!-- 실습별 상세 내용 -->
+  <g transform="translate(800, 110)">
+    <rect x="0" y="0" width="750" height="250" fill="white" stroke="#dee2e6" stroke-width="2" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="750" height="40" fill="#17a2b8" rx="10"/>
+    <text x="375" y="28" class="phase-title" text-anchor="middle" fill="white">Phase 2 실습 구성</text>
+    
+    <text x="20" y="70" class="sub-title">7개 실습의 점진적 학습 구조:</text>
+    
+    <!-- 실습 리스트 -->
+    <rect x="20" y="85" width="710" height="30" fill="#e7f3ff" stroke="#007bff"/>
+    <text x="30" y="104" class="label">실습 8-2: 등가 조인 기본 → WHERE EMP.DEPTNO = DEPT.DEPTNO</text>
+    
+    <rect x="20" y="115" width="710" height="30" fill="#f0f8ff"/>
+    <text x="30" y="134" class="label">실습 8-3: 테이블 별칭 도입 → FROM EMP E, DEPT D</text>
+    
+    <rect x="20" y="145" width="710" height="30" fill="#ffe7e7" stroke="#dc3545"/>
+    <text x="30" y="164" class="error">실습 8-4: 컬럼 충돌 오류 → ORA-00918 체험 (교육적 목적)</text>
+    
+    <rect x="20" y="175" width="710" height="30" fill="#e7f3ff" stroke="#007bff"/>
+    <text x="30" y="194" class="label">실습 8-5: 명확한 지정 해결 → E.DEPTNO, D.DEPTNO 구분</text>
+    
+    <rect x="20" y="205" width="710" height="30" fill="#f0f8ff"/>
+    <text x="30" y="224" class="label">실습 8-6: 조인+필터 조건 → AND SAL >= 3000 추가</text>
+  </g>
+
+  <!-- 실습 8-2: 등가 조인 기본 -->
+  <g transform="translate(50, 380)">
+    <rect x="0" y="0" width="480" height="320" fill="white" stroke="#28a745" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="45" fill="#28a745" rx="10"/>
+    <text x="240" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-2: 등가 조인 (기본)</text>
+    
+    <text x="20" y="75" class="sub-title">목적: 카티션 곱 → 의미있는 조인</text>
+    
+    <!-- Before/After -->
+    <rect x="20" y="90" width="200" height="80" fill="#ffe7e7" stroke="#dc3545" rx="5"/>
+    <text x="120" y="110" class="label" text-anchor="middle">Before (실습 8-1)</text>
+    <text x="120" y="130" class="code" text-anchor="middle">WHERE 절 없음</text>
+    <text x="120" y="150" class="result" text-anchor="middle">결과: 56행 (14×4)</text>
+    
+    <rect x="260" y="90" width="200" height="80" fill="#d4edda" stroke="#28a745" rx="5"/>
+    <text x="360" y="110" class="label" text-anchor="middle">After (실습 8-2)</text>
+    <text x="360" y="130" class="code" text-anchor="middle">WHERE 조인조건</text>
+    <text x="360" y="150" class="result" text-anchor="middle">결과: 14행 (정확!)</text>
+    
+    <!-- 화살표 -->
+    <line x1="220" y1="130" x2="260" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="180" width="440" height="110" fill="#f8f9fa" stroke="#6c757d" rx="5"/>
+    <text x="30" y="200" class="code">SELECT *</text>
+    <text x="30" y="220" class="code">FROM EMP, DEPT</text>
+    <text x="30" y="240" class="code">WHERE EMP.DEPTNO = DEPT.DEPTNO  -- 조인 조건!</text>
+    <text x="30" y="260" class="code">ORDER BY EMPNO;</text>
+    <text x="30" y="280" class="result">-- 각 사원이 자신의 부서와만 매칭</text>
+  </g>
+
+  <!-- 실습 8-3: 테이블 별칭 -->
+  <g transform="translate(560, 380)">
+    <rect x="0" y="0" width="480" height="320" fill="white" stroke="#17a2b8" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="45" fill="#17a2b8" rx="10"/>
+    <text x="240" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-3: 테이블 별칭</text>
+    
+    <text x="20" y="75" class="sub-title">목적: 코드 간결화 및 가독성 향상</text>
+    
+    <!-- 별칭 설명 -->
+    <rect x="20" y="90" width="440" height="80" fill="#d1ecf1" stroke="#17a2b8" rx="5"/>
+    <text x="30" y="110" class="label">별칭 사용 이점:</text>
+    <text x="40" y="130" class="label">• 타이핑 감소: EMP → E, DEPT → D</text>
+    <text x="40" y="150" class="label">• 자체 조인시 필수 (같은 테이블 구분)</text>
+    <text x="40" y="165" class="label">• 코드 가독성 향상</text>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="180" width="440" height="110" fill="#f8f9fa" stroke="#6c757d" rx="5"/>
+    <text x="30" y="200" class="code">SELECT *</text>
+    <text x="30" y="220" class="code">FROM EMP E, DEPT D  -- 별칭 선언</text>
+    <text x="30" y="240" class="code">WHERE E.DEPTNO = D.DEPTNO  -- 별칭 사용</text>
+    <text x="30" y="260" class="code">ORDER BY EMPNO;</text>
+    <text x="30" y="280" class="note">-- 실습 8-2와 동일한 결과, 더 간결한 코드</text>
+  </g>
+
+  <!-- 실습 8-4: 컬럼명 충돌 (오류) -->
+  <g transform="translate(1070, 380)">
+    <rect x="0" y="0" width="480" height="320" fill="white" stroke="#dc3545" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="45" fill="#dc3545" rx="10"/>
+    <text x="240" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-4: 컬럼명 충돌 (오류)</text>
+    
+    <text x="20" y="75" class="sub-title">목적: 문제 체험 → 해결 동기 부여</text>
+    
+    <!-- 오류 설명 -->
+    <rect x="20" y="90" width="440" height="80" fill="#f8d7da" stroke="#dc3545" rx="5"/>
+    <text x="30" y="110" class="error">오류 발생 시나리오:</text>
+    <text x="40" y="130" class="label">• DEPTNO가 양쪽 테이블에 존재</text>
+    <text x="40" y="150" class="label">• Oracle이 어느 테이블인지 판단 불가</text>
+    <text x="40" y="165" class="error">• ORA-00918: column ambiguously defined</text>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="180" width="440" height="110" fill="#f8f9fa" stroke="#dc3545" rx="5"/>
+    <text x="30" y="200" class="code">SELECT EMPNO, ENAME,</text>
+    <text x="30" y="220" class="error">       DEPTNO,  -- ❌ 오류! 어느 테이블?</text>
+    <text x="30" y="240" class="code">       DNAME, LOC</text>
+    <text x="30" y="260" class="code">FROM EMP E, DEPT D</text>
+    <text x="30" y="280" class="code">WHERE E.DEPTNO = D.DEPTNO;</text>
+  </g>
+
+  <!-- 실습 8-5: 명확한 컬럼 지정 -->
+  <g transform="translate(50, 720)">
+    <rect x="0" y="0" width="480" height="320" fill="white" stroke="#28a745" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="45" fill="#28a745" rx="10"/>
+    <text x="240" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-5: 명확한 컬럼 지정</text>
+    
+    <text x="20" y="75" class="sub-title">목적: 실습 8-4 오류 해결</text>
+    
+    <!-- 해결 방법 -->
+    <rect x="20" y="90" width="440" height="80" fill="#d4edda" stroke="#28a745" rx="5"/>
+    <text x="30" y="110" class="label">해결 방법:</text>
+    <text x="40" y="130" class="label">✓ 모든 컬럼에 테이블 별칭 명시</text>
+    <text x="40" y="150" class="label">✓ 특히 중복 컬럼은 필수 지정</text>
+    <text x="40" y="165" class="label">✓ Best Practice: 항상 별칭 사용</text>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="180" width="440" height="110" fill="#f8f9fa" stroke="#6c757d" rx="5"/>
+    <text x="30" y="200" class="code">SELECT E.EMPNO, E.ENAME,</text>
+    <text x="30" y="220" class="code">       D.DEPTNO,  -- ✅ 테이블 지정!</text>
+    <text x="30" y="240" class="code">       D.DNAME, D.LOC</text>
+    <text x="30" y="260" class="code">FROM EMP E, DEPT D</text>
+    <text x="30" y="280" class="code">WHERE E.DEPTNO = D.DEPTNO;</text>
+  </g>
+
+  <!-- 실습 8-6: 조인 + 필터 조건 -->
+  <g transform="translate(560, 720)">
+    <rect x="0" y="0" width="480" height="320" fill="white" stroke="#6c757d" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="45" fill="#6c757d" rx="10"/>
+    <text x="240" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-6: 조인 + 필터 조건</text>
+    
+    <text x="20" y="75" class="sub-title">목적: WHERE절의 두 가지 역할 이해</text>
+    
+    <!-- 조건 구분 -->
+    <rect x="20" y="90" width="210" height="80" fill="#fff3cd" stroke="#ffc107" rx="5"/>
+    <text x="125" y="110" class="label" text-anchor="middle">조인 조건</text>
+    <text x="125" y="130" class="code" text-anchor="middle">E.DEPTNO = D.DEPTNO</text>
+    <text x="125" y="150" class="small" text-anchor="middle">테이블 연결</text>
+    
+    <rect x="250" y="90" width="210" height="80" fill="#e2e3e5" stroke="#6c757d" rx="5"/>
+    <text x="355" y="110" class="label" text-anchor="middle">필터 조건</text>
+    <text x="355" y="130" class="code" text-anchor="middle">SAL >= 3000</text>
+    <text x="355" y="150" class="small" text-anchor="middle">데이터 필터링</text>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="180" width="440" height="110" fill="#f8f9fa" stroke="#6c757d" rx="5"/>
+    <text x="30" y="200" class="code">SELECT E.EMPNO, E.ENAME, E.SAL, D.DNAME</text>
+    <text x="30" y="220" class="code">FROM EMP E, DEPT D</text>
+    <text x="30" y="240" class="code">WHERE E.DEPTNO = D.DEPTNO  -- 조인</text>
+    <text x="30" y="260" class="code">  AND SAL >= 3000;         -- 필터</text>
+    <text x="30" y="280" class="result">-- 결과: 3명 (KING, FORD, SCOTT)</text>
+  </g>
+
+  <!-- 실습 8-7: 비등가 조인 -->
+  <g transform="translate(50, 1060)">
+    <rect x="0" y="0" width="735" height="320" fill="white" stroke="#ffc107" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="735" height="45" fill="#ffc107" rx="10"/>
+    <text x="367" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-7: 비등가 조인 (Non-Equi Join)</text>
+    
+    <text x="20" y="75" class="sub-title">목적: 등호(=)가 아닌 범위 조건 조인</text>
+    
+    <!-- 급여 등급 테이블 -->
+    <rect x="20" y="90" width="350" height="120" fill="#fff3cd" stroke="#ffc107" rx="5"/>
+    <text x="195" y="110" class="label" text-anchor="middle">SALGRADE 테이블</text>
+    <line x1="30" y1="120" x2="360" y2="120" stroke="#ffc107"/>
+    <text x="70" y="140" class="small">GRADE</text>
+    <text x="170" y="140" class="small">LOSAL</text>
+    <text x="270" y="140" class="small">HISAL</text>
+    <line x1="30" y1="145" x2="360" y2="145" stroke="#ffc107"/>
+    <text x="70" y="165" class="code">1</text>
+    <text x="170" y="165" class="code">700</text>
+    <text x="270" y="165" class="code">1200</text>
+    <text x="70" y="185" class="code">2</text>
+    <text x="170" y="185" class="code">1201</text>
+    <text x="270" y="185" class="code">1400</text>
+    <text x="70" y="205" class="code">...</text>
+    
+    <!-- 범위 매칭 그림 -->
+    <rect x="390" y="90" width="325" height="120" fill="#e8f5e9" stroke="#4caf50" rx="5"/>
+    <text x="552" y="110" class="label" text-anchor="middle">범위 매칭</text>
+    <rect x="400" y="120" width="305" height="20" fill="#ffeb3b" opacity="0.5"/>
+    <text x="410" y="135" class="small">700 ← SMITH(800) → 1200 ✓ 1등급</text>
+    <rect x="400" y="145" width="305" height="20" fill="#ff9800" opacity="0.5"/>
+    <text x="410" y="160" class="small">1401 ← ALLEN(1600) → 2000 ✓ 3등급</text>
+    <rect x="400" y="170" width="305" height="20" fill="#f44336" opacity="0.5"/>
+    <text x="410" y="185" class="small">3001 ← KING(5000) → 9999 ✓ 5등급</text>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="220" width="695" height="90" fill="#f8f9fa" stroke="#6c757d" rx="5"/>
+    <text x="30" y="240" class="code">SELECT E.EMPNO, E.ENAME, E.SAL, S.GRADE</text>
+    <text x="30" y="260" class="code">FROM EMP E, SALGRADE S</text>
+    <text x="30" y="280" class="code">WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL;  -- 범위 조건!</text>
+    <text x="30" y="300" class="note">-- 등호(=) 대신 BETWEEN 사용</text>
+  </g>
+
+  <!-- 실습 8-8: 자체 조인 -->
+  <g transform="translate(815, 1060)">
+    <rect x="0" y="0" width="735" height="320" fill="white" stroke="#6f42c1" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="735" height="45" fill="#6f42c1" rx="10"/>
+    <text x="367" y="30" class="phase-title" text-anchor="middle" fill="white">실습 8-8: 자체 조인 (Self Join)</text>
+    
+    <text x="20" y="75" class="sub-title">목적: 같은 테이블을 두 번 사용하여 계층 구조 표현</text>
+    
+    <!-- 자체 조인 개념도 -->
+    <g transform="translate(20, 90)">
+      <!-- EMP as E1 -->
+      <rect x="0" y="0" width="150" height="120" fill="#e8daef" stroke="#6f42c1" rx="5"/>
+      <text x="75" y="20" class="label" text-anchor="middle">EMP as E1</text>
+      <text x="75" y="40" class="small" text-anchor="middle">(사원)</text>
+      <line x1="10" y1="50" x2="140" y2="50" stroke="#6f42c1"/>
+      <text x="20" y="70" class="small">EMPNO</text>
+      <text x="80" y="70" class="small">ENAME</text>
+      <text x="120" y="70" class="small">MGR</text>
+      <text x="20" y="90" class="code">7369</text>
+      <text x="80" y="90" class="code">SMITH</text>
+      <text x="120" y="90" class="code">7902</text>
+      <text x="20" y="110" class="code">7839</text>
+      <text x="80" y="110" class="code">KING</text>
+      <text x="120" y="110" class="code">NULL</text>
+    </g>
+    
+    <!-- 화살표 -->
+    <path d="M 200,130 Q 250,150 300,130" stroke="#6f42c1" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <text x="250" y="145" class="small" text-anchor="middle">E1.MGR = E2.EMPNO</text>
+    
+    <!-- EMP as E2 -->
+    <g transform="translate(320, 90)">
+      <rect x="0" y="0" width="150" height="120" fill="#e8daef" stroke="#6f42c1" rx="5"/>
+      <text x="75" y="20" class="label" text-anchor="middle">EMP as E2</text>
+      <text x="75" y="40" class="small" text-anchor="middle">(매니저)</text>
+      <line x1="10" y1="50" x2="140" y2="50" stroke="#6f42c1"/>
+      <text x="20" y="70" class="small">EMPNO</text>
+      <text x="80" y="70" class="small">ENAME</text>
+      <text x="120" y="70" class="small">MGR</text>
+      <text x="20" y="90" class="code">7902</text>
+      <text x="80" y="90" class="code">FORD</text>
+      <text x="120" y="90" class="code">7566</text>
+    </g>
+    
+    <!-- 결과 설명 -->
+    <rect x="490" y="90" width="225" height="120" fill="#f3e5f5" stroke="#6f42c1" rx="5"/>
+    <text x="602" y="110" class="label" text-anchor="middle">조인 결과</text>
+    <text x="500" y="130" class="small">• SMITH의 매니저는 FORD</text>
+    <text x="500" y="150" class="small">• 13행 출력 (KING 제외)</text>
+    <text x="500" y="170" class="small">• KING은 MGR=NULL</text>
+    <text x="500" y="190" class="small">• 계층 구조 표현 가능</text>
+    
+    <!-- SQL 코드 -->
+    <rect x="20" y="220" width="695" height="90" fill="#f8f9fa" stroke="#6c757d" rx="5"/>
+    <text x="30" y="240" class="code">SELECT E1.EMPNO, E1.ENAME, E1.MGR, E2.EMPNO AS MGR_EMPNO, E2.ENAME AS MGR_ENAME</text>
+    <text x="30" y="260" class="code">FROM EMP E1, EMP E2  -- 같은 테이블 두 번!</text>
+    <text x="30" y="280" class="code">WHERE E1.MGR = E2.EMPNO;  -- 사원의 MGR = 매니저의 EMPNO</text>
+    <text x="30" y="300" class="error">-- 주의: KING 제외됨 (MGR이 NULL)</text>
+  </g>
+
+  <!-- Phase 2 핵심 정리 -->
+  <g transform="translate(50, 1410)">
+    <rect x="0" y="0" width="1500" height="350" fill="white" stroke="#343a40" stroke-width="3" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="1500" height="50" fill="#343a40" rx="10"/>
+    <text x="750" y="35" class="phase-title" text-anchor="middle" fill="white">Phase 2 핵심 정리: Oracle 내부조인 마스터</text>
+    
+    <!-- 학습 흐름도 -->
+    <text x="50" y="80" class="section-title">학습 흐름:</text>
+    
+    <!-- 흐름도 박스들 -->
+    <rect x="50" y="100" width="180" height="60" fill="#ffebee" stroke="#f44336" rx="5"/>
+    <text x="140" y="125" class="label" text-anchor="middle">1. 카티션 곱</text>
+    <text x="140" y="145" class="small" text-anchor="middle">56행 (문제 인식)</text>
+    
+    <line x1="230" y1="130" x2="270" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="270" y="100" width="180" height="60" fill="#e8f5e9" stroke="#4caf50" rx="5"/>
+    <text x="360" y="125" class="label" text-anchor="middle">2. 조인 조건 추가</text>
+    <text x="360" y="145" class="small" text-anchor="middle">14행 (해결!)</text>
+    
+    <line x1="450" y1="130" x2="490" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="490" y="100" width="180" height="60" fill="#e3f2fd" stroke="#2196f3" rx="5"/>
+    <text x="580" y="125" class="label" text-anchor="middle">3. 별칭 사용</text>
+    <text x="580" y="145" class="small" text-anchor="middle">코드 간결화</text>
+    
+    <line x1="670" y1="130" x2="710" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="710" y="100" width="180" height="60" fill="#fce4ec" stroke="#e91e63" rx="5"/>
+    <text x="800" y="125" class="label" text-anchor="middle">4. 오류 체험</text>
+    <text x="800" y="145" class="small" text-anchor="middle">컬럼 충돌</text>
+    
+    <line x1="890" y1="130" x2="930" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="930" y="100" width="180" height="60" fill="#e8f5e9" stroke="#4caf50" rx="5"/>
+    <text x="1020" y="125" class="label" text-anchor="middle">5. 명확한 지정</text>
+    <text x="1020" y="145" class="small" text-anchor="middle">E.COL, D.COL</text>
+    
+    <line x1="1110" y1="130" x2="1150" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="1150" y="100" width="180" height="60" fill="#fff3cd" stroke="#ffc107" rx="5"/>
+    <text x="1240" y="125" class="label" text-anchor="middle">6. 조건 결합</text>
+    <text x="1240" y="145" class="small" text-anchor="middle">조인+필터</text>
+    
+    <!-- 특수 조인 -->
+    <text x="50" y="200" class="section-title">특수 케이스:</text>
+    
+    <rect x="50" y="220" width="300" height="80" fill="#fff9e6" stroke="#ff9800" rx="5"/>
+    <text x="200" y="245" class="label" text-anchor="middle">비등가 조인 (실습 8-7)</text>
+    <text x="200" y="265" class="code" text-anchor="middle">BETWEEN 사용</text>
+    <text x="200" y="285" class="small" text-anchor="middle">급여-등급 매칭</text>
+    
+    <rect x="380" y="220" width="300" height="80" fill="#f3e5f5" stroke="#9c27b0" rx="5"/>
+    <text x="530" y="245" class="label" text-anchor="middle">자체 조인 (실습 8-8)</text>
+    <text x="530" y="265" class="code" text-anchor="middle">EMP E1, EMP E2</text>
+    <text x="530" y="285" class="small" text-anchor="middle">사원-매니저 관계</text>
+    
+    <!-- 핵심 문법 -->
+    <rect x="710" y="220" width="620" height="80" fill="#e0f2f1" stroke="#009688" rx="5"/>
+    <text x="720" y="245" class="sub-title">Oracle 내부조인 핵심 문법:</text>
+    <text x="730" y="265" class="code">FROM 테이블1 별칭1, 테이블2 별칭2</text>
+    <text x="730" y="285" class="code">WHERE 별칭1.컬럼 = 별칭2.컬럼 [AND 추가조건]</text>
+    
+    <!-- 체크리스트 -->
+    <rect x="50" y="320" width="1400" height="25" fill="#28a745" rx="5"/>
+    <text x="750" y="338" class="label" fill="white" text-anchor="middle">
+      ✓ WHERE절 조인 마스터 | ✓ 별칭 사용 숙달 | ✓ 컬럼 충돌 해결 | ✓ 조인+필터 구분 | ✓ 비등가/자체 조인 이해
+    </text>
+  </g>
+
+  <!-- 실무 팁 박스 -->
+  <g transform="translate(50, 1780)">
+    <rect x="0" y="0" width="700" height="200" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="700" height="40" fill="#2196f3" rx="10"/>
+    <text x="350" y="28" class="phase-title" text-anchor="middle" fill="white">💡 Phase 2 실무 팁</text>
+    
+    <text x="20" y="70" class="label">1. 항상 테이블 별칭 사용 → 실수 방지</text>
+    <text x="20" y="95" class="label">2. 조인 조건 먼저, 필터 조건 나중에 → 가독성 향상</text>
+    <text x="20" y="120" class="label">3. 결과 행 수 확인 → 카티션 곱 방지</text>
+    <text x="20" y="145" class="label">4. 컬럼명 충돌시 즉시 테이블 지정 → 오류 예방</text>
+    <text x="20" y="170" class="label">5. 자체 조인시 의미있는 별칭 사용 → E1(사원), E2(매니저)</text>
+  </g>
+
+  <!-- 주의사항 박스 -->
+  <g transform="translate(850, 1780)">
+    <rect x="0" y="0" width="700" height="200" fill="#ffebee" stroke="#f44336" stroke-width="2" rx="10" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="700" height="40" fill="#f44336" rx="10"/>
+    <text x="350" y="28" class="phase-title" text-anchor="middle" fill="white">⚠️ Phase 2 주의사항</text>
+    
+    <text x="20" y="70" class="error">1. WHERE 절 빼먹으면 → 카티션 곱 (56행!)</text>
+    <text x="20" y="95" class="error">2. DEPTNO처럼 중복 컬럼 → 반드시 테이블 지정</text>
+    <text x="20" y="120" class="error">3. 자체 조인시 별칭 없으면 → 오류 발생</text>
+    <text x="20" y="145" class="error">4. NULL 값 처리 → 내부조인은 NULL 제외 (KING 누락)</text>
+    <text x="20" y="170" class="error">5. AND/OR 우선순위 → 괄호 사용 권장</text>
+  </g>
+
+  <!-- Phase 진행 표시 -->
+  <g transform="translate(50, 2010)">
+    <rect x="0" y="0" width="1500" height="100" fill="white" stroke="#6c757d" stroke-width="2" rx="10" filter="url(#shadow)"/>
+    <text x="750" y="30" class="section-title" text-anchor="middle">Phase 2 완료 후 진행 방향</text>
+    
+    <rect x="50" y="40" width="400" height="50" fill="#ffc107" stroke="#ff9800" rx="5"/>
+    <text x="250" y="60" class="label" text-anchor="middle">현재: Phase 2 완료</text>
+    <text x="250" y="78" class="small" text-anchor="middle">Oracle 내부조인 마스터</text>
+    
+    <line x1="450" y1="65" x2="550" y2="65" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="550" y="40" width="400" height="50" fill="#e8f5e9" stroke="#4caf50" rx="5"/>
+    <text x="750" y="60" class="label" text-anchor="middle">다음: Phase 3</text>
+    <text x="750" y="78" class="small" text-anchor="middle">Oracle 외부조인 (NULL 처리)</text>
+    
+    <line x1="950" y1="65" x2="1050" y2="65" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <rect x="1050" y="40" width="400" height="50" fill="#e3f2fd" stroke="#2196f3" rx="5"/>
+    <text x="1250" y="60" class="label" text-anchor="middle">이후: Phase 4-5</text>
+    <text x="1250" y="78" class="small" text-anchor="middle">ANSI 표준 전환</text>
+  </g>
+
+  <!-- 하단 요약 -->
+  <rect x="50" y="2130" width="1500" height="50" fill="url(#headerGradient)" rx="10"/>
+  <text x="800" y="2160" class="phase-title" text-anchor="middle" fill="white">
+    Phase 2 핵심: FROM A, B WHERE A.ID = B.ID → 교집합만 추출 → Oracle 내부조인 완성!
+  </text>
+</svg>
